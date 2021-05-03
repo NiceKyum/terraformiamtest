@@ -33,8 +33,8 @@ node_templates:
     properties:
       resource_config:
         source:
-          location: https://github.com/NiceKyum/terraformiamtest/archive/master.zip
-        source_path: template
+          location: https://github.com/NiceKyum/terraformiamtest/raw/main/template.zip
+        source_path: abc
         variables:
           access_key: { get_secret: aws_access_key_id }
           secret_key: { get_secret: aws_secret_access_key }
