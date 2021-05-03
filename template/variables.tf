@@ -1,4 +1,9 @@
-variable "aws_profile" {
+variable "access_key" {
+  type = string
+  default = "default"
+}
+
+variable "secret_key" {
   type = string
   default = "default"
 }
