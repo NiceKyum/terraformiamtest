@@ -1,0 +1,46 @@
+tosca_definitions_version: cloudify_dsl_1_3
+
+description: >
+  This blueprint creates infrastructure on AWS using Terraform.
+imports:
+  - https://cloudify.co/spec/cloudify/5.1.0/types.yaml
+  - plugin:cloudify-terraform-plugin?version= >=0.15.0
+  - plugin:cloudify-utilities-plugin?version= >=1.22.1
+
+inputs:
+
+  iam_user_name:
+    description: >
+      IAM user name
+    type: string
+    default: 'hakyum-registration-user'
+
+  iam_role_name:
+    type: string
+    default: 'hakyum-registration-role'
+
+  iam_policy_name:
+    type: string
+    default: 'hakyum-registration-policy'  
+
+node_templates:
+
+  terraform:
+    type: cloudify.nodes.terraform
+
+  cloud_resources:
+    type: cloudify.nodes.terraform.Module
+    properties:
+      resource_config:
+        source:
+          location: https://github.com/NiceKyum/terraformiamtest/archive/master.zip
+        source_path: template
+        variables:
+          access_key: { get_secret: aws_access_key_id }
+          secret_key: { get_secret: aws_secret_access_key }
+          iam_user_name : { get_input: iam_user_name }
+          iam_role_name : { get_input: iam_role_name }
+          custom_policy_name : { get_input: iam_policy_name }
+    relationships:
+      - target: terraform
+        type: cloudify.terraform.relationships.run_on_host

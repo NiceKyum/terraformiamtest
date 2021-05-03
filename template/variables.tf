@@ -15,17 +15,17 @@ variable "aws_region" {
 
 variable "iam_user_name" {
   type = string
-  default = "cloudxper-registration-user"
+  default = "hakyum-registration-user"
 }
 
 variable "custom_policy_name" {
   type = string
-  default = "cloudxper-registration-policy"
+  default = "hakyum-registration-policy"
 }
 
 variable "iam_role_name" {
   type = string
-  default = "cloudxper-registration-role"
+  default = "hakyum-registration-role"
 }
 
 variable "custom_policy_json" {
@@ -50,5 +50,13 @@ variable "iam_policy_arn" {
   description = "IAM Policy to be attached to user"  
   default = [
     "arn:aws:iam::aws:policy/ReadOnlyAccess"
+  ]
+}
+
+variable "role_relationship_policy_arn" {
+  description = "Role Trust RelationShip Policy to be attached to role"  
+  default = [
+    "arn:aws:iam::611495371442:role/CrossAccountManagementRole",
+    "arn:aws:iam::611495371442:role/CX-PROD-EKS-NODEGROUP-NodeInstanceRole-1HYC11PY1OT07"
   ]
 }

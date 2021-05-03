@@ -26,7 +26,19 @@ resource "aws_iam_access_key" "iamAccessKey" {
 
 resource "aws_iam_role" "iamRole" {
   name        = var.iam_role_name
-  description = "CloudXper Role"  
+  description = "CloudXper Role"
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          "AWS": var.role_relationship_policy_arn
+        }
+      },
+    ]
+  })
 }
 
 resource "aws_iam_user_policy_attachment" "IAM-attach-ARN" {
