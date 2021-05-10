@@ -34,7 +34,6 @@ variable "custom_policy_json" {
         {
             "Effect": "Allow",
             "Action": [
-                "kms:GetKeyPolicy",
                 "kms:GetKeyRotationStatus",
                 "kms:ListResourceTags",
                 "elasticfilesystem:ListTagsForResource",
